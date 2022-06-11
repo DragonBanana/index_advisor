@@ -7,7 +7,7 @@ from Utility import ParserForIndex as pi
 
 enc = en.encoding_schema()
 # path to your tpch_directory/dbgen
-work_dir = "/Users/lanhai/XProgram/PycharmProjects/2.18.0_rc2/dbgen"
+work_dir = "tpc_h/dbgen"
 w_size = 14
 wd_generator = ds.TPCH(work_dir, w_size)
 workload = wd_generator.gen_workloads()

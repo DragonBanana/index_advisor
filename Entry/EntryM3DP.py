@@ -9,10 +9,10 @@ import Utility.PostgreSQL as pg
 def One_Run_DQN(is_fixcount, conf, __x, is_dnn, is_ps, is_double, a):
     conf['NAME'] = 'MA_9' + str(__x)
     print('=====load workload=====')
-    wf = open('workload.pickle', 'rb')
+    wf = open('Entry/workload.pickle', 'rb')
     workload = pickle.load(wf)
     print('=====load candidate =====')
-    cf = open('cands.pickle', 'rb')
+    cf = open('Entry/cands.pickle', 'rb')
     index_candidates = pickle.load(cf)
     if is_fixcount:
         agent = model.DQN(workload[:], index_candidates, 'hypo', conf, is_dnn, is_ps, is_double, a)
@@ -53,7 +53,7 @@ conf21 = {'LR': 0.002, 'EPISILO': 0.97, 'Q_ITERATION': 200, 'U_ITERATION': 5, 'B
           'EPISODES': 800, 'LEARNING_START': 1000, 'MEMORY_CAPACITY': 20000}
 
 conf = {'LR': 0.1, 'EPISILO': 0.9, 'Q_ITERATION': 9, 'U_ITERATION': 3, 'BATCH_SIZE': 8, 'GAMMA': 0.9,
-        'EPISODES': 800, 'LEARNING_START': 400, 'MEMORY_CAPACITY': 800}
+        'EPISODES': 800, 'LEARNING_START': 400, 'MEMORY_CAPACITY': 2000}
 
 
 # is_fixcount == True, constraint is the index number
@@ -65,4 +65,4 @@ def entry(is_fixcount, constraint):
         print(One_Run_DQN(is_fixcount, conf, constraint, False, False, False, 0))
 
 
-entry(True, 4)
+entry(True, 15)
