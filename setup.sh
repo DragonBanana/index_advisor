@@ -15,4 +15,4 @@ sudo apt install build-essential -y
 
 # INSTALL CONDA ENVIRONMENT
 conda config --set restore_free_channel true
-conda env create -f index_advisor/environment.yaml python=3.6
+conda env create -f environment.yaml python=3.6

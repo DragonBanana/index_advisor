@@ -18,7 +18,12 @@ class TPCH:
         lines = p.stdout.readlines()
         sql = ""
         for i, line in enumerate(lines):
-            sql += str(line, encoding="utf-8")
+            line = str(line, encoding="utf-8")
+            if "day (" in line:
+                line = line.split("day (")[0]
+            sql += line 
+            if ";" in line:
+                break
         p.communicate()
         return sql
 

@@ -113,7 +113,7 @@ dependencies:
   - zlib=1.2.11
   - pip:
     - protobuf==3.11.3
-    - psqlparse==0.2.5
+    - psqlparse==1.0rc7
     - tensorboardx==2.0
 prefix: /opt/anaconda3/envs/ixadvisor2
 
