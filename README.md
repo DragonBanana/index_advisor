@@ -1,3 +1,17 @@
+# Reproducibility report
+Code for the RL course at Polimi 2022.
+
+## Getting started
+- install conda and create the environment. `conda create -f environment.yaml`
+- activate the environment. `conda activate ixadvisor2`
+- `export PYTHONPATH=repository_directory`
+- In a separate shell: `docker container run --name postgres_index_advisor -e POSTGRES_PASSWORD=adv -e POSTGRES_USER=adv -e POSTGRES_DB=adv -p 5432:5432 postgres:14 -d postgres_index_advisor`
+
+Now you have setup the environment!
+To create tables in the database use the file in `Preprocess/tpch_schema.sql`. Data to populate the db are in the `ref_data` folder
+To generate the workload and candles run: `python ./Utility/Sample4GenCandidates.py`
+
+
 # Index Advisor based on Deep Reinforcement Learning
 Code for CIKM2020 [paper](https://dl.acm.org/doi/abs/10.1145/3340531.3412106)
 
