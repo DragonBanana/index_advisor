@@ -6,13 +6,13 @@ import Model.Model3DQNFixStorage as model2
 import Utility.PostgreSQL as pg
 
 
-def One_Run_DQN(is_fixcount, conf, __x, is_dnn, is_ps, is_double, a):
+def One_Run_DQN(is_fixcount, conf, __x, is_dnn, is_ps, is_double, a, workload_file, candidate_file):
     conf['NAME'] = 'MA_9' + str(__x)
     print('=====load workload=====')
-    wf = open('Entry/workload.pickle', 'rb')
+    wf = open(workload_file, 'rb')
     workload = pickle.load(wf)
     print('=====load candidate =====')
-    cf = open('Entry/cands.pickle', 'rb')
+    cf = open(candidate_file, 'rb')
     index_candidates = pickle.load(cf)
     if is_fixcount:
         agent = model.DQN(workload[:], index_candidates, 'hypo', conf, is_dnn, is_ps, is_double, a)
@@ -39,14 +39,14 @@ def get_perf(f_indexes, _frequencies):
     workload = pickle.load(wf)
     pg_client = pg.PGHypo()
     pg_client.delete_indexes()
-    cost1 = (np.array(pg_client.get_queries_cost(workload))*frequencies).sum()
+    cost1 = (np.array(pg_client.get_queries_cost(workload)) * frequencies).sum()
     print(cost1)
     for f_index in f_indexes:
         pg_client.execute_create_hypo(f_index)
-    cost2 = (np.array(pg_client.get_queries_cost(workload))*frequencies).sum()
+    cost2 = (np.array(pg_client.get_queries_cost(workload)) * frequencies).sum()
     print(cost2)
     pg_client.delete_indexes()
-    print((cost1-cost2)/cost1)
+    print((cost1 - cost2) / cost1)
 
 
 conf21 = {'LR': 0.002, 'EPISILO': 0.97, 'Q_ITERATION': 200, 'U_ITERATION': 5, 'BATCH_SIZE': 64, 'GAMMA': 0.95,
@@ -58,11 +58,39 @@ conf = {'LR': 0.1, 'EPISILO': 0.9, 'Q_ITERATION': 9, 'U_ITERATION': 3, 'BATCH_SI
 
 # is_fixcount == True, constraint is the index number
 # is_fixcount == False, constraint is the index storage unit
-def entry(is_fixcount, constraint):
+def entry(is_fixcount, constraint, workload_file, candidate_file):
     if is_fixcount:
-        print(One_Run_DQN(is_fixcount, conf21, constraint, False, True, True, 0))
+        print(One_Run_DQN(is_fixcount, conf21, constraint, False, True, True, 0, workload_file, candidate_file))
     else:
-        print(One_Run_DQN(is_fixcount, conf, constraint, False, False, False, 0))
+        print(One_Run_DQN(is_fixcount, conf, constraint, False, False, False, 0, workload_file, candidate_file))
 
 
-entry(True, 15)
+for n in range(2, 12):
+    print("----------------------------")
+    print("Workload 14 - Candidate 14 C")
+    print("----------------------------")
+    entry(True, n, 'workload_14.pickle', 'candidate_14_c.pickle')
+
+for n in range(2, 12):
+    print("----------------------------")
+    print("Workload 14 - Candidate 14 S")
+    print("----------------------------")
+    entry(True, n, 'workload_14.pickle', 'candidate_14_s.pickle')
+
+for n in range(3, 9):
+    print("----------------------------")
+    print("Workload 14 - Candidate2 14 S")
+    print("----------------------------")
+    entry(True, n, 'workload_14.pickle', 'candidate2_14_s.pickle')
+
+for n in range(3, 9):
+    print("----------------------------")
+    print("Storage - Workload 14 - Candidate2 14 S")
+    print("----------------------------")
+    entry(False, n, 'workload_14.pickle', 'candidate2_14_s.pickle')
+
+for n in range(2, 12):
+    print("----------------------------")
+    print("Workload 14 - Candidate2 14 S")
+    print("----------------------------")
+    entry(True, n, 'workload1_50.pickle', 'candidate1_14_c.pickle')
