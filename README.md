@@ -11,6 +11,7 @@ Now you have setup the environment!
 To create tables in the database use the file in `Preprocess/tpch_schema.sql`. Data to populate the db are in the `ref_data` folder
 To generate the workload and candles run: `python ./Utility/Sample4GenCandidates.py`
 
+In order to populate the database copy `gen_tables.sh` and `clean_data.py` to `./tpc-h` folder (it is required by tpch since all the executables are there)
 
 # Index Advisor based on Deep Reinforcement Learning
 Code for CIKM2020 [paper](https://dl.acm.org/doi/abs/10.1145/3340531.3412106)
