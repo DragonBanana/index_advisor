@@ -65,8 +65,13 @@ def entry(is_fixcount, constraint, workload_file, candidate_file):
     else:
         return One_Run_DQN(is_fixcount, conf, constraint, False, False, False, 0, workload_file, candidate_file)
 
+
 fix_count_freq = [1659, 1301, 1190, 1741, 1688, 1242, 1999, 1808, 1433, 1083, 1796, 1266, 1046, 1353]
 fix_storage_freq = [1659, 1301, 1190, 1741, 1688, 1242, 1999, 1808, 1433, 1083, 1796, 1266, 1046, 1353]
+
+def log(x):
+    with open("test.txt", "a") as myfile:
+        myfile.write(x)
 
 for n in range(2, 12):
     print("----------------------------")
@@ -75,6 +80,7 @@ for n in range(2, 12):
     indexes = entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate_14_c.pickle')
     print(indexes)
     reward = get_perf(indexes, fix_count_freq, 'Entry/workload_14.pickle')
+    log(reward)
 
 for n in range(2, 12):
     print("----------------------------")
@@ -83,6 +89,7 @@ for n in range(2, 12):
     indexes = entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate_14_s.pickle')
     print(indexes)
     reward = get_perf(indexes, fix_count_freq, 'Entry/workload_14.pickle')
+    log(reward)
 
 for n in range(3, 9):
     print("----------------------------")
@@ -91,6 +98,7 @@ for n in range(3, 9):
     indexes = entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate2_14_c.pickle')
     print(indexes)
     reward = get_perf(indexes, fix_count_freq, 'Entry/workload_14.pickle')
+    log(reward)
 
 for n in range(3, 9):
     print("----------------------------")
@@ -99,6 +107,7 @@ for n in range(3, 9):
     indexes = entry(False, n, 'Entry/workload_14.pickle', 'Entry/candidate2_14_c.pickle')
     print(indexes)
     reward = get_perf(indexes, fix_storage_freq, 'Entry/workload_14.pickle')
+    log(reward)
 
 for n in range(2, 12):
     print("----------------------------")
@@ -107,3 +116,4 @@ for n in range(2, 12):
     indexes = entry(True, n, 'Entry/workload1_50.pickle', 'Entry/candidate1_14_c.pickle')
     print(indexes)
     reward = get_perf(indexes, fix_count_freq, 'Entry/workload1_50.pickle')
+    log(reward) 
