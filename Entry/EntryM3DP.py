@@ -69,28 +69,28 @@ for n in range(2, 12):
     print("----------------------------")
     print("Workload 14 - Candidate 14 C")
     print("----------------------------")
-    entry(True, n, 'workload_14.pickle', 'candidate_14_c.pickle')
+    entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate_14_c.pickle')
 
 for n in range(2, 12):
     print("----------------------------")
     print("Workload 14 - Candidate 14 S")
     print("----------------------------")
-    entry(True, n, 'workload_14.pickle', 'candidate_14_s.pickle')
+    entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate_14_s.pickle')
 
 for n in range(3, 9):
     print("----------------------------")
     print("Workload 14 - Candidate2 14 C")
     print("----------------------------")
-    entry(True, n, 'workload_14.pickle', 'candidate2_14_c.pickle')
+    entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate2_14_c.pickle')
 
 for n in range(3, 9):
     print("----------------------------")
     print("Storage - Workload 14 - Candidate2 14 C")
     print("----------------------------")
-    entry(False, n, 'workload_14.pickle', 'candidate2_14_c.pickle')
+    entry(False, n, 'Entry/workload_14.pickle', 'Entry/candidate2_14_c.pickle')
 
 for n in range(2, 12):
     print("----------------------------")
     print("Workload 50 - Candidate2 14 C")
     print("----------------------------")
-    entry(True, n, 'workload1_50.pickle', 'candidate1_14_c.pickle')
+    entry(True, n, 'Entry/workload1_50.pickle', 'Entry/candidate1_14_c.pickle')
