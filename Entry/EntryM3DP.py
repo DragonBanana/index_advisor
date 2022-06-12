@@ -79,18 +79,18 @@ for n in range(2, 12):
 
 for n in range(3, 9):
     print("----------------------------")
-    print("Workload 14 - Candidate2 14 S")
+    print("Workload 14 - Candidate2 14 C")
     print("----------------------------")
-    entry(True, n, 'workload_14.pickle', 'candidate2_14_s.pickle')
+    entry(True, n, 'workload_14.pickle', 'candidate2_14_c.pickle')
 
 for n in range(3, 9):
     print("----------------------------")
-    print("Storage - Workload 14 - Candidate2 14 S")
+    print("Storage - Workload 14 - Candidate2 14 C")
     print("----------------------------")
-    entry(False, n, 'workload_14.pickle', 'candidate2_14_s.pickle')
+    entry(False, n, 'workload_14.pickle', 'candidate2_14_c.pickle')
 
 for n in range(2, 12):
     print("----------------------------")
-    print("Workload 14 - Candidate2 14 S")
+    print("Workload 50 - Candidate2 14 C")
     print("----------------------------")
     entry(True, n, 'workload1_50.pickle', 'candidate1_14_c.pickle')

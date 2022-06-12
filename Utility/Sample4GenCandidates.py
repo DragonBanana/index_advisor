@@ -7,7 +7,7 @@ from Utility import ParserForIndex as pi
 enc = en.encoding_schema()
 # path to your tpch_directory/dbgen
 work_dir = "tpc-h"
-w_size = 14
+w_size = 50
 wd_generator = ds.TPCH(work_dir, w_size)
 workload = wd_generator.gen_workloads()
 print(f'wd_generator {wd_generator}, workdir {work_dir}, workload {workload}')
@@ -52,5 +52,5 @@ def gen_i(__x):
         pickle.dump(list(temp), df, protocol=0)
 
 
-for i in range(0, w_size):
-    gen_i(i)
+# for i in range(0, w_size):
+gen_i(14)
