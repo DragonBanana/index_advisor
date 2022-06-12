@@ -14,6 +14,8 @@ workload = wd_generator.gen_workloads()
 print(f'wd_generator {wd_generator}, workdir {work_dir}, workload {workload}')
 parser = pi.Parser(enc['attr'])
 
+with open('workload' + str(w_size) + '.pickle', 'wb') as df:
+    pickle.dump(workload, df, protocol=0)
 
 def gen_i(__x):
     added_i = set()
@@ -36,10 +38,12 @@ def gen_i(__x):
     f_i = parser.index_candidates | added_i
     f_i = list(f_i)
     f_i.sort()
-    with open('cands'+str(__x+1)+'.pickle', 'wb') as df:
+    with open('candidate'+str(__x+1)+'.pickle', 'wb') as df:
         pickle.dump(list(f_i), df, protocol=0)
-    with open('workload'+str(__x+1)+'.pickle', 'wb') as df:
-        pickle.dump(workload, df, protocol=0)
+
+    f_i = [x for x in f_i if len(x.split(",")) == 1]
+    with open('candidate1'+str(__x+1)+'.pickle', 'wb') as df:
+        pickle.dump(list(f_i), df, protocol=0)
 
 
 
