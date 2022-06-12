@@ -71,7 +71,9 @@ fix_storage_freq = [1659, 1301, 1190, 1741, 1688, 1242, 1999, 1808, 1433, 1083, 
 
 def log(x):
     with open("test.txt", "a") as myfile:
-        myfile.write(x)
+        myfile.write(f"{str(x)}\n")
+        myfile.flush()
+        myfile.close()
 
 for n in range(2, 12):
     print("----------------------------")
@@ -116,4 +118,4 @@ for n in range(2, 12):
     indexes = entry(True, n, 'Entry/workload1_50.pickle', 'Entry/candidate1_14_c.pickle')
     print(indexes)
     reward = get_perf(indexes, fix_count_freq, 'Entry/workload1_50.pickle')
-    log(reward) 
+    log(reward)
