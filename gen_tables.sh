@@ -1,13 +1,13 @@
 #!/bin/bash
 
-dbgen -vf -s $1 -T s
-dbgen -vf -s $1 -T S 
-dbgen -vf -s $1 -T r 
-dbgen -vf -s $1 -T P 
-dbgen -vf -s $1 -T p 
-dbgen -vf -s $1 -T O 
-dbgen -vf -s $1 -T o 
-dbgen -vf -s $1 -T n 
-dbgen -vf -s $1 -T L 
-dbgen -vf -s $1 -T l 
-dbgen -vf -s $1 -T c
+$1 -vf -s $2 -T s
+$1 -vf -s $2 -T S 
+$1 -vf -s $2 -T r 
+$1 -vf -s $2 -T P 
+$1 -vf -s $2 -T p 
+$1 -vf -s $2 -T O 
+$1 -vf -s $2 -T o 
+$1 -vf -s $2 -T n 
+$1 -vf -s $2 -T L 
+$1 -vf -s $2 -T l 
+$1 -vf -s $2 -T c
