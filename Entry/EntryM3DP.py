@@ -70,7 +70,7 @@ fix_count_freq = [1659, 1301, 1190, 1741, 1688, 1242, 1999, 1808, 1433, 1083, 17
 fix_storage_freq = [1659, 1301, 1190, 1741, 1688, 1242, 1999, 1808, 1433, 1083, 1796, 1266, 1046, 1353]
 
 def log(file, x):
-    with open("file", "a") as myfile:
+    with open(file, "a") as myfile:
         myfile.write(f"{str(x)}\n")
         myfile.flush()
         myfile.close()
