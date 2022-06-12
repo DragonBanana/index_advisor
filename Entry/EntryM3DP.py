@@ -47,7 +47,7 @@ def get_perf(f_indexes, _frequencies, workload_file):
     print(cost2)
     pg_client.delete_indexes()
     print((cost1 - cost2) / cost1)
-    return (cost1 - cost2) / cost1
+    return cost1, cost2, (cost1 - cost2) / cost1
 
 
 conf21 = {'LR': 0.002, 'EPISILO': 0.97, 'Q_ITERATION': 200, 'U_ITERATION': 5, 'BATCH_SIZE': 64, 'GAMMA': 0.95,
@@ -69,53 +69,53 @@ def entry(is_fixcount, constraint, workload_file, candidate_file):
 fix_count_freq = [1659, 1301, 1190, 1741, 1688, 1242, 1999, 1808, 1433, 1083, 1796, 1266, 1046, 1353]
 fix_storage_freq = [1659, 1301, 1190, 1741, 1688, 1242, 1999, 1808, 1433, 1083, 1796, 1266, 1046, 1353]
 
-def log(x):
-    with open("test.txt", "a") as myfile:
+def log(file, x):
+    with open("file", "a") as myfile:
         myfile.write(f"{str(x)}\n")
         myfile.flush()
         myfile.close()
 
-for n in range(2, 12):
+for n in range(2, 13):
     print("----------------------------")
     print("Workload 14 - Candidate 14 C")
     print("----------------------------")
     indexes = entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate_14_c.pickle')
     print(indexes)
     reward = get_perf(indexes, fix_count_freq, 'Entry/workload_14.pickle')
-    log(reward)
+    log("exp1.txt", f"exp1_{n}_{reward}")
 
-for n in range(2, 12):
+for n in range(2, 13):
     print("----------------------------")
     print("Workload 14 - Candidate 14 S")
     print("----------------------------")
     indexes = entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate_14_s.pickle')
     print(indexes)
     reward = get_perf(indexes, fix_count_freq, 'Entry/workload_14.pickle')
-    log(reward)
+    log("exp2.txt", f"exp2_{n}_{reward}")
 
-for n in range(3, 9):
+for n in range(3, 10):
     print("----------------------------")
     print("Workload 14 - Candidate2 14 C")
     print("----------------------------")
     indexes = entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate2_14_c.pickle')
     print(indexes)
     reward = get_perf(indexes, fix_count_freq, 'Entry/workload_14.pickle')
-    log(reward)
+    log("exp3.txt", f"exp3_{n}_{reward}")
 
-for n in range(3, 9):
+for n in range(3, 10):
     print("----------------------------")
     print("Storage - Workload 14 - Candidate2 14 C")
     print("----------------------------")
     indexes = entry(False, n, 'Entry/workload_14.pickle', 'Entry/candidate2_14_c.pickle')
     print(indexes)
     reward = get_perf(indexes, fix_storage_freq, 'Entry/workload_14.pickle')
-    log(reward)
+    log("exp4.txt", f"exp4_{n}_{reward}")
 
-for n in range(2, 12):
+for n in range(2, 13):
     print("----------------------------")
     print("Workload 50 - Candidate2 14 C")
     print("----------------------------")
     indexes = entry(True, n, 'Entry/workload1_50.pickle', 'Entry/candidate1_14_c.pickle')
     print(indexes)
     reward = get_perf(indexes, fix_count_freq, 'Entry/workload1_50.pickle')
-    log(reward)
+    log("exp5.txt", f"exp5_{n}_{reward}")
