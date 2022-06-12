@@ -32,10 +32,10 @@ def One_Run_DQN(is_fixcount, conf, __x, is_dnn, is_ps, is_double, a, workload_fi
         return indexes
 
 
-def get_perf(f_indexes, _frequencies):
+def get_perf(f_indexes, _frequencies, workload_file):
     # _frequencies = [1659, 1301, 1190, 1741, 1688, 1242, 1999, 1808, 1433, 1083, 1796, 1266, 1046, 1353]
     frequencies = np.array(_frequencies) / np.array(_frequencies).sum()
-    wf = open('workload.pickle', 'rb')
+    wf = open(workload_file, 'rb')
     workload = pickle.load(wf)
     pg_client = pg.PGHypo()
     pg_client.delete_indexes()
@@ -47,6 +47,7 @@ def get_perf(f_indexes, _frequencies):
     print(cost2)
     pg_client.delete_indexes()
     print((cost1 - cost2) / cost1)
+    return (cost1 - cost2) / cost1
 
 
 conf21 = {'LR': 0.002, 'EPISILO': 0.97, 'Q_ITERATION': 200, 'U_ITERATION': 5, 'BATCH_SIZE': 64, 'GAMMA': 0.95,
@@ -60,37 +61,49 @@ conf = {'LR': 0.1, 'EPISILO': 0.9, 'Q_ITERATION': 9, 'U_ITERATION': 3, 'BATCH_SI
 # is_fixcount == False, constraint is the index storage unit
 def entry(is_fixcount, constraint, workload_file, candidate_file):
     if is_fixcount:
-        print(One_Run_DQN(is_fixcount, conf21, constraint, False, True, True, 0, workload_file, candidate_file))
+        return One_Run_DQN(is_fixcount, conf21, constraint, False, True, True, 0, workload_file, candidate_file)
     else:
-        print(One_Run_DQN(is_fixcount, conf, constraint, False, False, False, 0, workload_file, candidate_file))
+        return One_Run_DQN(is_fixcount, conf, constraint, False, False, False, 0, workload_file, candidate_file)
 
+fix_count_freq = [1659, 1301, 1190, 1741, 1688, 1242, 1999, 1808, 1433, 1083, 1796, 1266, 1046, 1353]
+fix_storage_freq = [1659, 1301, 1190, 1741, 1688, 1242, 1999, 1808, 1433, 1083, 1796, 1266, 1046, 1353]
 
 for n in range(2, 12):
     print("----------------------------")
     print("Workload 14 - Candidate 14 C")
     print("----------------------------")
-    entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate_14_c.pickle')
+    indexes = entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate_14_c.pickle')
+    print(indexes)
+    reward = get_perf(indexes, fix_count_freq, 'Entry/workload_14.pickle')
 
 for n in range(2, 12):
     print("----------------------------")
     print("Workload 14 - Candidate 14 S")
     print("----------------------------")
-    entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate_14_s.pickle')
+    indexes = entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate_14_s.pickle')
+    print(indexes)
+    reward = get_perf(indexes, fix_count_freq, 'Entry/workload_14.pickle')
 
 for n in range(3, 9):
     print("----------------------------")
     print("Workload 14 - Candidate2 14 C")
     print("----------------------------")
-    entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate2_14_c.pickle')
+    indexes = entry(True, n, 'Entry/workload_14.pickle', 'Entry/candidate2_14_c.pickle')
+    print(indexes)
+    reward = get_perf(indexes, fix_count_freq, 'Entry/workload_14.pickle')
 
 for n in range(3, 9):
     print("----------------------------")
     print("Storage - Workload 14 - Candidate2 14 C")
     print("----------------------------")
-    entry(False, n, 'Entry/workload_14.pickle', 'Entry/candidate2_14_c.pickle')
+    indexes = entry(False, n, 'Entry/workload_14.pickle', 'Entry/candidate2_14_c.pickle')
+    print(indexes)
+    reward = get_perf(indexes, fix_storage_freq, 'Entry/workload_14.pickle')
 
 for n in range(2, 12):
     print("----------------------------")
     print("Workload 50 - Candidate2 14 C")
     print("----------------------------")
-    entry(True, n, 'Entry/workload1_50.pickle', 'Entry/candidate1_14_c.pickle')
+    indexes = entry(True, n, 'Entry/workload1_50.pickle', 'Entry/candidate1_14_c.pickle')
+    print(indexes)
+    reward = get_perf(indexes, fix_count_freq, 'Entry/workload1_50.pickle')
